@@ -1,17 +1,14 @@
 #!/usr/bin/python3
-"""This module defines a class User"""
+"""Defines the User class."""
 from models.base_model import Base
 from models.base_model import BaseModel
-from models.review import Review
 from sqlalchemy import Column
-from sqlalchemy import String, Integer
+from sqlalchemy import String
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
 
 
 class User(BaseModel, Base):
-    """This class defines  user by various attributes
-       "Represents a user for a MySQL database.
+    """Represents a user for a MySQL database.
 
     Inherits from SQLAlchemy Base and links to the MySQL table users.
 
@@ -29,7 +26,5 @@ class User(BaseModel, Base):
     password = Column(String(128), nullable=False)
     first_name = Column(String(128))
     last_name = Column(String(128))
-    places = relationship("Place", backref="user",
-                          cascade='all, delete, delete-orphan')
-    reviews = relationship("Review", backref="user",
-                           cascade='all, delete, delete-orphan')
+    places = relationship("Place", backref="user", cascade="delete")
+    reviews = relationship("Review", backref="user", cascade="delete")
